@@ -1,13 +1,19 @@
-from face_detection import Detector
+from detector import Detector
 import cv2 as cv
 
+# Initializing detector
 detector = Detector(
-    "face_detection/models/deploy.prototxt", 
-    "face_detection/models/res10_300x300_ssd_iter_140000.caffemodel"
+    prototxt_path="face_detection/models/deploy.prototxt", 
+    model_path="face_detection/models/res10_300x300_ssd_iter_140000.caffemodel"
 )
 
+# Initializing camera
 camera = cv.VideoCapture(0)
+if not camera.isOpened:
+    print("Camera failed to open.")
+    exit()
 
+# Using camera input to detect faces
 while True:
     ret, frame = camera.read()
     if not ret:
@@ -24,5 +30,6 @@ while True:
     if cv.waitKey(1) & 0xFF == 27:
         break
 
+# Cleaning up
 camera.release()
 cv.destroyAllWindows()
