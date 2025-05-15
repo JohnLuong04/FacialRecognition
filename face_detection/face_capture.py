@@ -11,7 +11,7 @@ detector = Detector(
 
 # Initializing camera
 camera = cv.VideoCapture(0)
-if not camera.isOpened:
+if not camera.isOpened():
     print("Camera failed to open.")
     exit()
 
@@ -36,8 +36,15 @@ while True:
   
 
     # Checks if ESC key is pressed, and breaks if so
-    if cv.waitKey(1) & 0xFF == 27:
+    key = cv.waitKey(1)
+    if key == 27:
         break
+    if key == ord('s'):
+        with open('initial_face_images_index.txt', 'r') as file:
+            index = file.read()
+            cv.imwrite(f'database/initial_face_images/face{index}.png', frame)
+        with open('initial_face_images_index.txt', 'w') as file:
+            file.write(str(int(index) + 1))
 
 # Cleaning up
 camera.release()
