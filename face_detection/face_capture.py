@@ -1,5 +1,6 @@
 from detector import Detector
 import cv2 as cv
+import os
 
 # Initializing detector
 detector = Detector(
@@ -31,6 +32,8 @@ while True:
     if key == 27:
         break
     if key == ord('s'):
+        if not os.path.exists('database/initial_face_images'):
+            os.makedirs('database/initial_face_images')
         with open('initial_face_images_index.txt', 'r') as file:
             index = file.read()
             cv.imwrite(f'database/initial_face_images/face{index}.png', frame)
