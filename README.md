@@ -7,3 +7,8 @@ A simple facial recognition app. Detects faces and displays the name of the indi
 ## How to Run:
 - (Optional): Initialize and activate virtual environment
 - Install required dependencies: pip install -r requirements.txt
+
+## Requirements:
+- Python
+- Cmake
+- All dependencies listed in requirements.txt

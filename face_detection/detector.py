@@ -7,7 +7,6 @@ class Detector:
     def __init__(self, prototxt_path, model_path, predictor_path, confidence_threshold = 0.5):
         self.net = cv.dnn.readNetFromCaffe(prototxt_path, model_path)
         self.conf_threshold = confidence_threshold
-
         self.predictor = dlib.shape_predictor(predictor_path)
 
 
