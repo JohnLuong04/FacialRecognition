@@ -40,10 +40,10 @@ while True:
     if key == 27:
         break
     if key == ord('s'):
-        with open('initial_face_images_index.txt', 'r') as file:
+        with open('face_detection/initial_face_images_index.txt', 'r') as file:
             index = file.read()
             cv.imwrite(f'database/initial_face_images/face{index}.png', frame)
-        with open('initial_face_images_index.txt', 'w') as file:
+        with open('face_detection/initial_face_images_index.txt', 'w') as file:
             file.write(str(int(index) + 1))
 
 # Cleaning up
