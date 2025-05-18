@@ -26,9 +26,11 @@ while True:
 
     # Detecting faces in frame
     faces, eyes = detector.detect(frame)
+    face_image = frame
     # Drawing bounding box
     for(x, y, w, h) in faces:
         cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        face_image = frame[y:y+h, x:x+w]
     cv.imshow("Face Detection", frame)
 
     for(le,re) in eyes:
@@ -42,7 +44,7 @@ while True:
     if key == ord('s'):
         with open('face_detection/initial_face_images_index.txt', 'r') as file:
             index = file.read()
-            cv.imwrite(f'database/initial_face_images/face{index}.png', frame)
+            cv.imwrite(f'database/initial_face_images/face{index}.png', face_image)
         with open('face_detection/initial_face_images_index.txt', 'w') as file:
             file.write(str(int(index) + 1))
 
