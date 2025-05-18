@@ -15,9 +15,6 @@ if not camera.isOpened():
     print("Camera failed to open.")
     exit()
 
-# ERROR AT THIS LINE TO FIX
-dlib = dlib.shape_predictor("")
-
 # Using camera input to detect faces
 while True:
     ret, frame = camera.read()
@@ -26,16 +23,17 @@ while True:
 
     # Detecting faces in frame
     faces, eyes = detector.detect(frame)
-    face_image = frame
+    face_image = frame.copy()
     # Drawing bounding box
     for(x, y, w, h) in faces:
         cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        face_image = frame[y:y+h, x:x+w]
-    cv.imshow("Face Detection", frame)
+        face_image = face_image[y:y+h, x:x+w]
 
     for(le,re) in eyes:
         for(ex,ey) in le + re:
             cv.circle(frame, (ex,ey),2, (255,0,0), -1)
+    
+    cv.imshow("Face Detection", frame)
 
     # Checks for key presses: s for saving image, ESC for ending program
     key = cv.waitKey(1)
