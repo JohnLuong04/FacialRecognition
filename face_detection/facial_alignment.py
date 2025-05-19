@@ -1,4 +1,6 @@
 import os
+
+import cv2
 import cv2 as cv
 import math
 import numpy as np
@@ -23,6 +25,10 @@ def average_eye_position(landmark, start, end):
 
 def facial_alignment(image):
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    gray = clahe.apply(gray)
+
+
     faces = detector(gray)
     landmark = predictor(gray, faces[0])
 
